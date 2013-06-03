@@ -50,93 +50,65 @@ public class ItemShard extends Item {
 
     static HashMap<String, Integer> homeDims = new HashMap<String, Integer>();
     static {
-        homeDims.put(
-                (String) EntityList.classToStringMapping.get(EntityBlaze.class),
-                -1);
-        homeDims.put(
-                (String) EntityList.classToStringMapping.get(EntityGhast.class),
-                -1);
-        homeDims.put((String) EntityList.classToStringMapping
-                .get(EntityPigZombie.class), -1);
-        homeDims.put((String) EntityList.classToStringMapping
-                .get(EntityMagmaCube.class), -1);
-        homeDims.put((String) EntityList.classToStringMapping
-                .get(EntityEnderman.class), 1);
-        homeDims.put((String) EntityList.classToStringMapping
-                .get(EntityCaveSpider.class), 0);
-        homeDims.put((String) EntityList.classToStringMapping
-                .get(EntitySilverfish.class), 0);
-        homeDims.put((String) EntityList.classToStringMapping
-                .get(EntitySkeleton.class), 0);
-        homeDims.put((String) EntityList.classToStringMapping
-                .get(EntitySpider.class), 0);
-        homeDims.put(
-                (String) EntityList.classToStringMapping.get(EntitySlime.class),
-                0);
-        homeDims.put((String) EntityList.classToStringMapping
-                .get(EntityZombie.class), 0);
-        homeDims.put((String) EntityList.classToStringMapping
-                .get(EntityCreeper.class), 0);
-        homeDims.put(
-                (String) EntityList.classToStringMapping.get(EntityWitch.class),
-                0);
-        homeDims.put(
-                (String) EntityList.classToStringMapping.get(EntitySheep.class),
-                0);
-        homeDims.put(
-                (String) EntityList.classToStringMapping.get(EntityCow.class),
-                0);
-        homeDims.put((String) EntityList.classToStringMapping
-                .get(EntityMooshroom.class), 0);
-        homeDims.put((String) EntityList.classToStringMapping
-                .get(EntityChicken.class), 0);
-        homeDims.put(
-                (String) EntityList.classToStringMapping.get(EntityBat.class),
-                0);
-        homeDims.put((String) EntityList.classToStringMapping
-                .get(EntityOcelot.class), 0);
-        homeDims.put(
-                (String) EntityList.classToStringMapping.get(EntityWolf.class),
-                0);
-        homeDims.put(
-                (String) EntityList.classToStringMapping.get(EntityPig.class),
-                0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityBlaze.class), -1);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityGhast.class), -1);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityPigZombie.class), -1);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityMagmaCube.class), -1);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityEnderman.class), 1);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityCaveSpider.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntitySilverfish.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntitySkeleton.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntitySpider.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntitySlime.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityZombie.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityCreeper.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityWitch.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntitySheep.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityCow.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityMooshroom.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityChicken.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityBat.class),0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityOcelot.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityWolf.class), 0);
+        homeDims.put((String) EntityList.classToStringMapping.get(EntityPig.class), 0);
         homeDims.put("entBrainyZombie", 0);
         homeDims.put("entFirebat", -1);
-
-        /*
-         * type.equals((String)EntityList.classToStringMapping.get(EntitySheep.class
-         * )) ||
-         * type.equals((String)EntityList.classToStringMapping.get(EntityCow
-         * .class)) ||
-         * type.equals((String)EntityList.classToStringMapping.get(EntityMooshroom
-         * .class)) ||
-         * type.equals((String)EntityList.classToStringMapping.get(EntityChicken
-         * .class)) ||
-         * type.equals((String)EntityList.classToStringMapping.get(EntityBat
-         * .class)) ||
-         * type.equals((String)EntityList.classToStringMapping.get(EntityOcelot
-         * .class)) ||
-         * type.equals((String)EntityList.classToStringMapping.get(EntityWolf
-         * .class)) ||
-         * type.equals((String)EntityList.classToStringMapping.get(EntityPig
-         * .class))
-         */
+        
+        homeDims.put("TwilightForest.Wild Boar", 0);
+        homeDims.put("TwilightForest.Bighorn Sheep", 0);
+        homeDims.put("TwilightForest.Wild Deer", 0);
+        homeDims.put("TwilightForest.Redcap", 0);
+        homeDims.put("TwilightForest.Swarm Spider", 0);
+        homeDims.put("TwilightForest.Skeleton Druid", 0);
+        homeDims.put("TwilightForest.Hostile Wolf", 0);
+        homeDims.put("TwilightForest.Twilight Wraith", 0);
+        homeDims.put("TwilightForest.Hedge Spider", 0);
+        homeDims.put("TwilightForest.Penguin", 0);
+        homeDims.put("TwilightForest.Twilight Kobold", 0);
+        homeDims.put("TwilightForest.Minotaur", 0);
+        homeDims.put("TwilightForest.Fire Beetle", 0);
+        homeDims.put("TwilightForest.Slime Beetle", 0);
+        homeDims.put("TwilightForest.Pinch Beetle", 0);
+        homeDims.put("TwilightForest.Maze Slime", 0);
+        homeDims.put("TwilightForest.Redcap Sapper", 0);
+        homeDims.put("TwilightForest.Mini Ghast", 0);
+        homeDims.put("TwilightForest.Tower Ghast", 0);
+        //homeDims.put("TwilightForest.Tower Golem", 0);
+        homeDims.put("TwilightForest.Tower Termite", 0);
+        homeDims.put("TwilightForest.Tower Broodling", 0);
     }
 
     protected ItemShard(int par1) {
         super(par1);
         this.setCreativeTab(CreativeTabs.tabMisc);
-        this.setMaxDamage(1024);
-        // this.setContainerItem(this);
-        canRepair = false;
+        this.maxStackSize = 1;
     }
 
     @Override
     public void addInformation(ItemStack is, EntityPlayer par2EntityPlayer,
             List list, boolean par4) {
         initTags(is);
-        Integer charges = (this.getMaxDamage() - is.getItemDamage());
+        Integer charges = getCharge(is);
         Integer tier = (int) ((Math.log(charges) / Math.log(2))) - 5;
         tier = (tier < 0) ? 0 : tier;
         if (charges == 0) {
@@ -166,11 +138,20 @@ public class ItemShard extends Item {
         }
     }
 
+    static Integer getCharge(ItemStack is) {
+        NBTTagCompound tag = is.getTagCompound();
+        return tag.getInteger("charge");
+    }
+    static void setCharge(ItemStack is, int c) {
+        initTags(is);
+        NBTTagCompound tag = is.getTagCompound();
+        
+        tag.setInteger("charge", c);
+    }
     @Override
     public boolean onItemUse(ItemStack is, EntityPlayer player, World w, int x,
             int y, int z, int face, float par8, float par9, float par10) {
         if (!w.isRemote) {
-            Integer iMD = this.getMaxDamage();
             /*
              * if (w.getBlockId(x, y, z) == Block.stone.blockID) {
              * w.setBlockWithNotify(x, y, z, Block.mobSpawner.blockID);
@@ -182,7 +163,7 @@ public class ItemShard extends Item {
                     && ItemShard.getType(is) != null) {
                 if (ItemShard.getType(is).isEmpty())
                     return false;
-                Integer charges = (iMD - is.getItemDamage());
+                Integer charges = getCharge(is);
                 Integer tier = (int) ((Math.log(charges) / Math.log(2))) - 5;
                 // Integer tier = charges / SoulShards.nextTier;
                 tier = (tier < 0) ? 0 : tier;
@@ -221,8 +202,8 @@ public class ItemShard extends Item {
                     e.printStackTrace();
                 }
                 if (!m.isEmpty() && m.equals(ItemShard.getType(is))) {
-                    Integer i = is.getItemDamage() - SoulShards.nextTier;
-                    is.setItemDamage((i <= 0) ? 0 : i);
+                    Integer i = getCharge(is) + SoulShards.nextTier;
+                    setCharge(is, (i >= 1024) ? 1024 : i);
                     w.setBlockToAir(x, y, z);
                     // w.setBlock(x, y, z, 0);
                     w.playAuxSFX(
@@ -282,6 +263,7 @@ public class ItemShard extends Item {
             tag.setString("mobtype", "");
             tag.setString("mobname", "");
             tag.setBoolean("specialmob", false);
+            tag.setInteger("charge", 0);
         }
 
         return tag;
@@ -295,7 +277,7 @@ public class ItemShard extends Item {
         par3List.add(is);
         for (int i = 1; i <= 5; i++) {
             is = new ItemStack(par1, 1, 0);
-            is.setItemDamage((int) (1024 - Math.pow(2, (i + 5))));
+            setCharge(is, (int)Math.pow(2, (i + 5)));
             par3List.add(is);
         }
     }

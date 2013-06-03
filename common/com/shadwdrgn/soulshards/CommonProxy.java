@@ -52,8 +52,7 @@ public class CommonProxy {
                 if (is.stackSize == 0) {
                     player.inventory.mainInventory[i] = null;
                 }
-                ItemStack iSS = new ItemStack(SoulShards.itemShard, 1,
-                        1024 - nSouls);
+                ItemStack iSS = new ItemStack(SoulShards.itemShard, 1);
                 String eClassName = (String) EntityList.classToStringMapping
                         .get(e.getClass());
                 ItemShard.setType(iSS, eClassName, e.getEntityName(),
@@ -70,22 +69,15 @@ public class CommonProxy {
             } else if (is.getItem().equals(SoulShards.itemShard)) {
                 String eClassName = (String) EntityList.classToStringMapping
                         .get(e.getClass());
+                int charge = ItemShard.getCharge(is);
                 if (ItemShard.getType(is).isEmpty()) {
                     ItemShard.setType(is, eClassName, e.getEntityName(),
                             bSpecialMob);
-                    is.setItemDamage((is.getItemDamage() <= 0) ? 0 : is
-                            .getItemDamage() - nSouls);
-                    // is.getItem().addInformation(is,
-                    // Arrays.asList(iShard.mobtype, "Charged: " +
-                    // Integer.toString(is.getItemDamage())));
+                    ItemShard.setCharge(is, (charge >= 1024) ? 1024 : charge + nSouls);
                     break;
                 } else if (ItemShard.getType(is).equals(eClassName)
                         && ItemShard.getSpecial(is) == bSpecialMob) {
-                    is.setItemDamage((is.getItemDamage() <= 0) ? 0 : is
-                            .getItemDamage() - nSouls);
-                    // is.getItem().addInformation(is,
-                    // Arrays.asList(iShard.mobtype, "Charged: " +
-                    // Integer.toString(is.getItemDamage())));
+                    ItemShard.setCharge(is, (charge >= 1024) ? 1024 : charge + nSouls);
                     break;
                 }
             }
