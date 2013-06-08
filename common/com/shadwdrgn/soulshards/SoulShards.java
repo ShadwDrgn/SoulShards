@@ -21,7 +21,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "SoulShards", name = "Soul Shards", version = SoulShards.VERSION, dependencies = "required-after:Forge@[7.7.2.679,]")
+@Mod(modid = "SoulShards", name = "Soul Shards", version = SoulShards.VERSION, dependencies = "required-after:Forge@[7.8.0.716,]")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { "SoulShards" }, packetHandler = PacketHandler.class)
 public class SoulShards {
     public static final String VERSION = "@VERSION@.@BUILD_NUMBER@";

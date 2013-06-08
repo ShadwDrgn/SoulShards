@@ -32,6 +32,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.MobSpawnerBaseLogic;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -152,13 +153,16 @@ public class ItemShard extends Item {
     public boolean onItemUse(ItemStack is, EntityPlayer player, World w, int x,
             int y, int z, int face, float par8, float par9, float par10) {
         if (!w.isRemote) {
-            /*
-             * if (w.getBlockId(x, y, z) == Block.stone.blockID) {
-             * w.setBlockWithNotify(x, y, z, Block.mobSpawner.blockID);
-             * TileEntityMobSpawner t =
-             * (TileEntityMobSpawner)w.getBlockTileEntity(x, y, z);
-             * t.setMobID("CaveSpider"); return true; }
-             */
+            
+             if (w.getBlockId(x, y, z) == Block.stone.blockID) {
+             w.setBlock(x, y, z, Block.mobSpawner.blockID);
+             TileEntityMobSpawner t =
+             (TileEntityMobSpawner)w.getBlockTileEntity(x, y, z);
+             MobSpawnerBaseLogic m = t.func_98049_a();
+             m.setMobID("CaveSpider");
+             return true;
+             }
+             
             if (w.getBlockId(x, y, z) == SoulShards.blockCage.blockID
                     && ItemShard.getType(is) != null) {
                 if (ItemShard.getType(is).isEmpty())
@@ -187,20 +191,10 @@ public class ItemShard extends Item {
                     is.stackSize = 0;
                     return true;
                 }
-            } else if (w.getBlockId(x, y, z) == Block.mobSpawner.blockID
-                    && ItemShard.getType(is) != null) {
-                TileEntityMobSpawner tems = (TileEntityMobSpawner) w
-                        .getBlockTileEntity(x, y, z);
-                Field f = null;
-                String m = "";
-                try {
-                    f = tems.getClass().getDeclaredFields()[1];
-                    f.setAccessible(true);
-                    m = (String) f.get(tems);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            } else if (w.getBlockId(x, y, z) == Block.mobSpawner.blockID && ItemShard.getType(is) != null) {
+                TileEntityMobSpawner tems = (TileEntityMobSpawner) w.getBlockTileEntity(x, y, z);
+                MobSpawnerBaseLogic msbl = tems.func_98049_a(); 
+                String m = msbl.getEntityNameToSpawn();
                 if (!m.isEmpty() && m.equals(ItemShard.getType(is))) {
                     Integer i = getCharge(is) + SoulShards.nextTier;
                     setCharge(is, (i >= 1024) ? 1024 : i);
