@@ -16,39 +16,36 @@ import cpw.mods.fml.common.network.Player;
 
 public class PacketHandler implements IPacketHandler {
 
-    @Override
-    public void onPacketData(INetworkManager manager,
-            Packet250CustomPayload packet, Player player) {
-        if (packet.channel.equals("SoulShards")) {
-            handlePacket(player, packet);
-        }
-    }
+	@Override
+	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
+		if (packet.channel.equals("SoulShards")) {
+			handlePacket(player, packet);
+		}
+	}
 
-    private void handlePacket(Player player, Packet250CustomPayload packet) {
-        EntityPlayer thePlayer = (EntityPlayer) player;
-        DataInputStream inputStream = new DataInputStream(
-                new ByteArrayInputStream(packet.data));
-        int x, y, z;
+	private void handlePacket(Player player, Packet250CustomPayload packet) {
+		EntityPlayer thePlayer = (EntityPlayer)player;
+		DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+		int x, y, z;
 
-        try {
-            x = inputStream.readInt();
-            y = inputStream.readInt();
-            z = inputStream.readInt();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        if (thePlayer.getHeldItem().itemID != Item.diamond.itemID)
-            return;
-        thePlayer.worldObj.setBlock(x, y, z, Block.whiteStone.blockID);
-        thePlayer.worldObj.setBlock(x + 1, y, z, Block.whiteStone.blockID);
-        thePlayer.worldObj.setBlock(x - 1, y, z, Block.whiteStone.blockID);
-        thePlayer.worldObj.setBlock(x, y, z + 1, Block.whiteStone.blockID);
-        thePlayer.worldObj.setBlock(x, y, z - 1, Block.whiteStone.blockID);
-        thePlayer.getHeldItem().stackSize--;
-        ItemStack iSS = new ItemStack(SoulShards.itemBlankShard, 1);
-        EntityItem ei = new EntityItem(thePlayer.worldObj, x, y + 1, z, iSS);
-        thePlayer.worldObj.spawnEntityInWorld(ei);
-    }
+		try {
+			x = inputStream.readInt();
+			y = inputStream.readInt();
+			z = inputStream.readInt();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		if (thePlayer.getHeldItem().itemID != Item.diamond.itemID) return;
+		thePlayer.worldObj.setBlock(x, y, z, Block.whiteStone.blockID);
+		thePlayer.worldObj.setBlock(x + 1, y, z, Block.whiteStone.blockID);
+		thePlayer.worldObj.setBlock(x - 1, y, z, Block.whiteStone.blockID);
+		thePlayer.worldObj.setBlock(x, y, z + 1, Block.whiteStone.blockID);
+		thePlayer.worldObj.setBlock(x, y, z - 1, Block.whiteStone.blockID);
+		thePlayer.getHeldItem().stackSize--;
+		ItemStack iSS = new ItemStack(SoulShards.Items.itemBlankShard, 1);
+		EntityItem ei = new EntityItem(thePlayer.worldObj, x, y + 1, z, iSS);
+		thePlayer.worldObj.spawnEntityInWorld(ei);
+	}
 
 }
