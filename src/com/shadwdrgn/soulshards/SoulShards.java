@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PreInit;
@@ -42,7 +43,7 @@ public class SoulShards {
     public static final Enchantment eSoulStealer = new EnchantmentSoulStealer(
             85, 10);
 
-    @PreInit
+	@EventHandler
     public void preinit(FMLPreInitializationEvent e) {
         Configuration config = new Configuration(
                 e.getSuggestedConfigurationFile());
@@ -61,7 +62,7 @@ public class SoulShards {
         config.save();
     }
 
-    @Init
+	@EventHandler
     public void init(FMLInitializationEvent e) {
         blockCage = new BlockCage(idCage).setHardness(5.0F)
                 .setStepSound(new StepSound("stone", 1.0F, 1.5F))

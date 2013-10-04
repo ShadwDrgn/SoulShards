@@ -84,7 +84,7 @@ public class TESoulCage extends TileEntity implements IInventory {
                 /*
                  * Create and spawn our mob group
                  */
-                EntityLiving mob = createMobByName(mobType);
+                EntityLiving mob = createMob();
                 
                 if (mob == null) {
                     return;
@@ -146,7 +146,7 @@ public class TESoulCage extends TileEntity implements IInventory {
         count++;
     }
 
-    private EntityLiving createMobByName(String mobType2) {
+    private EntityLiving createMob() {
     	if (mobType.equals("SpawnedBlaze") || mobType.equals("Blaze")) {
             return new EntitySpawnedBlaze(worldObj);
         } else if (mobType.equals("Skeleton")) {

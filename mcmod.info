@@ -1,0 +1,17 @@
+[
+{
+  "modid" : "SoulShards",
+  "name" : "Soul Shards",
+  "version" : "@VERSION@",
+  "url" : "",
+  "credits" : "",
+  "authors": [
+    "ShadwDrgn"
+  ],
+  "description": "",
+  "logoFile" : "",
+  "updateUrl" : "",
+  "parent" : "",
+  "screenshots": [
+  ]
+}]
