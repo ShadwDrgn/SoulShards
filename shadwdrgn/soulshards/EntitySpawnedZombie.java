@@ -7,24 +7,27 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class EntitySpawnedZombie extends EntityZombie {
+public class EntitySpawnedZombie extends EntityZombie implements ISpawnedMob {
     boolean special = false;
 
-    public EntitySpawnedZombie(World par1World) {
-        super(par1World);
+    public EntitySpawnedZombie(World world, boolean special) {
+        super(world);
+        this.special = special;
     }
 
-    @Override
-    public void entityInit() {
-        this.setCanPickUpLoot(rand.nextFloat() < 0.55F * this.worldObj.func_110746_b(this.posX, this.posY, this.posZ));
+    public EntitySpawnedZombie(World world) {
+        this(world, false);
+    }
 
+    
+    @Override
+    public void postInit() {
+        this.setCanPickUpLoot(rand.nextFloat() < 0.55F * this.worldObj.getLocationTensionFactor(this.posX, this.posY, this.posZ));
         if (special) {
             this.setVillager(true);
         }
-
         this.addRandomArmor();
         this.enchantEquipment();
-
         if (this.getCurrentItemOrArmor(4) == null) {
             Calendar var1 = worldObj.getCurrentDate();
 

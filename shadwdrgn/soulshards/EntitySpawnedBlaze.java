@@ -4,10 +4,10 @@ import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-public class EntitySpawnedBlaze extends EntityBlaze {
+public class EntitySpawnedBlaze extends EntityBlaze implements ISpawnedMob {
 
-    public EntitySpawnedBlaze(World par1World) {
-        super(par1World);
+    public EntitySpawnedBlaze(World world) {
+        super(world);
     }
 
     @Override
@@ -18,4 +18,9 @@ public class EntitySpawnedBlaze extends EntityBlaze {
             this.dropItem(Item.blazeRod.itemID, 1);
         }
     }
+
+	@Override
+	public void postInit() {
+		
+	}
 }

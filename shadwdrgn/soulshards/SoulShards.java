@@ -26,23 +26,17 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class SoulShards {
     public static final String VERSION = "1.0.39";
 
-    @Instance
+    @Instance(value = "SoulShards")
     public static SoulShards instance;
 
     @SidedProxy(clientSide = "com.shadwdrgn.soulshards.ClientProxy", serverSide = "com.shadwdrgn.soulshards.CommonProxy")
     public static CommonProxy proxy;
 
     public static int idBlankShard, idShard;
-    public static int idShadowElement;
-    public static int idShadowBlade, idShadowShovel, idShadowPickaxe,
-            idShadowAxe, idShadowHoe;
     public static int idCage;
     public static int nextTier;
 
     public static Item itemBlankShard, itemShard;
-    public static Item itemShadowElement;
-    public static Item itemShadowBlade, itemShadowShovel, itemShadowPickaxe,
-            itemShadowAxe, itemShadowHoe;
     public static Block blockCage;
 
     public static final Enchantment eSoulStealer = new EnchantmentSoulStealer(
@@ -61,19 +55,6 @@ public class SoulShards {
         idBlankShard = config.getItem(Configuration.CATEGORY_ITEM,
                 "Blank_Soul_Shard", 8076).getInt(8076);
 
-        idShadowElement = config.getItem(Configuration.CATEGORY_ITEM,
-                "Shadow_Element", 8086).getInt(8086);
-        idShadowBlade = config.getItem(Configuration.CATEGORY_ITEM,
-                "Shadow_Sword", 8087).getInt(8087);
-        idShadowShovel = config.getItem(Configuration.CATEGORY_ITEM,
-                "Shadow_Shovel", 8088).getInt(8088);
-        idShadowPickaxe = config.getItem(Configuration.CATEGORY_ITEM,
-                "Shadow_Pickaxe", 8089).getInt(8089);
-        idShadowAxe = config.getItem(Configuration.CATEGORY_ITEM, "Shadow_Axe",
-                8090).getInt(8090);
-        idShadowHoe = config.getItem(Configuration.CATEGORY_ITEM, "Shadow_Hoe",
-                8091).getInt(8091);
-
         nextTier = config.get(Configuration.CATEGORY_GENERAL, "between_Tiers",
                 200).getInt(200);
 
@@ -84,24 +65,12 @@ public class SoulShards {
     public void init(FMLInitializationEvent e) {
         blockCage = new BlockCage(idCage).setHardness(5.0F)
                 .setStepSound(new StepSound("stone", 1.0F, 1.5F))
-                .setUnlocalizedName("cage").func_111022_d("soulshards:cage");
+                .setUnlocalizedName("cage").setTextureName("soulshards:cage");
 
         itemBlankShard = new ItemBlankShard(idBlankShard)
-                .setUnlocalizedName("blankSoulShard").func_111206_d("soulshards:soulShard");
+                .setUnlocalizedName("blankSoulShard").setTextureName("soulshards:soulShard");
         itemShard = new ItemShard(idShard).setMaxStackSize(1)
-                .setUnlocalizedName("soulShard").func_111206_d("soulshards:soulShard");
-
-        // itemShadowElement = new
-        // ItemShadowElement(idShadowElement).setIconIndex(0x32).setUnlocalizedName("shadowElement");
-
-        itemShadowBlade = new ItemShadowBlade(idShadowBlade,
-                EnumToolMaterial.EMERALD).setUnlocalizedName("shadowBlade");
-        itemShadowPickaxe = new ItemShadowPickaxe(idShadowPickaxe,
-                EnumToolMaterial.EMERALD).setUnlocalizedName("shadowPickaxe");
-        // itemShadowAxe = new ItemShadowAxe(idShadowAxe,
-        // EnumToolMaterial.EMERALD).setIconIndex(0x63).setUnlocalizedName("shadowAxe");
-        // itemShadowHoe = new ItemShadowHoe(idShadowHoe,
-        // EnumToolMaterial.EMERALD).setIconIndex(0x73).setUnlocalizedName("shadowHoe");
+                .setUnlocalizedName("soulShard").setTextureName("soulshards:soulShard");
 
         MinecraftForge.EVENT_BUS.register(new HandlerForgeEvents());
         LanguageRegistry.instance().addStringLocalization(
@@ -110,12 +79,6 @@ public class SoulShards {
 
         LanguageRegistry.addName(itemBlankShard, "Soul Shard");
         LanguageRegistry.addName(itemShard, "Soul Shard");
-
-        LanguageRegistry.addName(itemShadowBlade, "Shadow Blade");
-        // LanguageRegistry.addName(itemShadowShovel, "Shadow Shovel");
-        LanguageRegistry.addName(itemShadowPickaxe, "Shadow Pickaxe");
-        // LanguageRegistry.addName(itemShadowAxe, "Shadow Axe");
-        // LanguageRegistry.addName(itemShadowHoe, "Shadow Hoe");
 
         GameRegistry.registerBlock(blockCage, "soulcage");
         GameRegistry.addRecipe(new ItemStack(blockCage, 1), new Object[] {

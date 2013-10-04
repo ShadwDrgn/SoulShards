@@ -63,7 +63,6 @@ public class TESoulCage extends TileEntity implements IInventory {
 
     @Override
     public void updateEntity() {
-        Entity mob = null;
         persistCheckCount++;
         if (persistCheckCount >= 200) {
             persistCheckCount = 0;
@@ -85,28 +84,16 @@ public class TESoulCage extends TileEntity implements IInventory {
                 /*
                  * Create and spawn our mob group
                  */
-                if (mobType.equals("SpawnedBlaze") || mobType.equals("Blaze")) {
-                    mob = EntityList.createEntityByName(
-                            EntityList.classToStringMapping.get(
-                                    EntitySpawnedBlaze.class).toString(),
-                            worldObj);
-                } else if (mobType.equals("Skeleton")) {
-                    mob = EntityList.createEntityByName(
-                            EntityList.classToStringMapping.get(
-                                    EntitySpawnedSkeleton.class).toString(),
-                            worldObj);
-                    ((EntitySpawnedSkeleton) mob).special = special;
-                } else if (mobType.equals("Zombie")) {
-                    mob = EntityList.createEntityByName(
-                            EntityList.classToStringMapping.get(
-                                    EntitySpawnedZombie.class).toString(),
-                            worldObj);
-                    ((EntitySpawnedZombie) mob).special = special;
-                } else {
-                    mob = EntityList.createEntityByName(mobType, worldObj);
-                }
-                if (mob == null)
+                EntityLiving mob = createMobByName(mobType);
+                
+                if (mob == null) {
                     return;
+                }
+                
+                if (mob instanceof ISpawnedMob) {
+                	((ISpawnedMob)mob).postInit();
+                }
+                
                 int numMobs = worldObj.getEntitiesWithinAABB(
                         mob.getClass(),
                         AxisAlignedBB
@@ -128,31 +115,28 @@ public class TESoulCage extends TileEntity implements IInventory {
                 double z = zCoord
                         + (worldObj.rand.nextDouble() - worldObj.rand
                                 .nextDouble()) * 4.0D;
-                EntityLiving elMob = mob instanceof EntityLiving ? (EntityLiving) mob
-                        : null;
+                
                 mob.setLocationAndAngles(x, y, z,
                         worldObj.rand.nextFloat() * 360.0F, 0.0F);
-                if (elMob == null || elMob.getCanSpawnHere()
-                        || ((tier == 5) && this.getCanSpawnHere(elMob))) {
+                if (mob.getCanSpawnHere()
+                        || ((tier == 5) && this.getCanSpawnHere(mob))) {
                     if (!mobType.isEmpty() && (tier < 5 || !signal)) {
                         /*
                          * Mark mob as spawned from cage
                          */
                         NBTTagCompound cTag = mob.getEntityData();
                         cTag.setBoolean("mobcage", true);
-                        // this.writeNBTTagsTo(mob);
-                        //((EntityLiving) mob).entityInit();
                         worldObj.spawnEntityInWorld(mob);
                         worldObj.playAuxSFX(2004, xCoord, yCoord, zCoord, 0);
-                        if (elMob != null) {
+                        if (mob != null) {
                             if (tier >= 3) {
                                 try {
-                                    presistenceRequired.set(elMob, true);
+                                    presistenceRequired.set(mob, true);
                                 } catch (Exception Ex) {
                                 }
-                                persistList.add(elMob);
+                                persistList.add(mob);
                             }
-                            elMob.spawnExplosionParticle();
+                            mob.spawnExplosionParticle();
                         }
                         count = 0;
                     }
@@ -162,7 +146,22 @@ public class TESoulCage extends TileEntity implements IInventory {
         count++;
     }
 
-    @Override
+    private EntityLiving createMobByName(String mobType2) {
+    	if (mobType.equals("SpawnedBlaze") || mobType.equals("Blaze")) {
+            return new EntitySpawnedBlaze(worldObj);
+        } else if (mobType.equals("Skeleton")) {
+        	return new EntitySpawnedSkeleton(worldObj, special);
+        } else if (mobType.equals("Zombie")) {
+        	return new EntitySpawnedZombie(worldObj, special);
+        }
+        Entity entity = EntityList.createEntityByName(mobType, worldObj);
+        if (entity instanceof EntityLiving) {
+        	return (EntityLiving)entity;
+        }
+        return null;
+	}
+
+	@Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
         mobType = par1NBTTagCompound.getString("mobType");
