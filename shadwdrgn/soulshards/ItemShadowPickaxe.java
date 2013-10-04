@@ -2,7 +2,7 @@ package com.shadwdrgn.soulshards;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
@@ -26,7 +26,7 @@ public class ItemShadowPickaxe extends ItemPickaxe {
 
     @Override
     public boolean onBlockDestroyed(ItemStack is, World world, int blockID,
-            int x, int y, int z, EntityLiving par7EntityLiving) {
+            int x, int y, int z, EntityLivingBase par7EntityLiving) {
         if (par7EntityLiving.isSneaking())
             return super.onBlockDestroyed(is, world, blockID, x, y, z,
                     par7EntityLiving);

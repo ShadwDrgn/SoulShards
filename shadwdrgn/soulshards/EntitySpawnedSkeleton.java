@@ -25,7 +25,7 @@ public class EntitySpawnedSkeleton extends EntitySkeleton {
     }
 
     @Override
-    public void initCreature() {
+    public void entityInit() {
         if (special) {
             tasks.addTask(4, new EntityAIAttackOnCollide(this,
                     EntityPlayer.class, 0.31F, false));
@@ -35,10 +35,10 @@ public class EntitySpawnedSkeleton extends EntitySkeleton {
             tasks.addTask(4,
                     new EntityAIArrowAttack(this, 0.25F, 20, 60, 15.0F));
             this.addRandomArmor();
-            this.func_82162_bC();
+            this.enchantEquipment();
         }
 
-        this.setCanPickUpLoot(rand.nextFloat() < pickUpLootProability[worldObj.difficultySetting]);
+        this.setCanPickUpLoot(rand.nextFloat() < 0.55F * this.worldObj.func_110746_b(this.posX, this.posY, this.posZ));
 
         if (this.getCurrentItemOrArmor(4) == null) {
             Calendar var1 = worldObj.getCurrentDate();

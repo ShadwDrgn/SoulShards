@@ -3,7 +3,7 @@ package com.shadwdrgn.soulshards;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
@@ -26,7 +26,7 @@ public class CommonProxy {
         // Number of charges gained
         int nSouls = 1 + EnchantmentHelper.getEnchantmentLevel(
                 SoulShards.eSoulStealer.effectId,
-                ((EntityLiving) player).getHeldItem());
+                ((EntityLivingBase) player).getHeldItem());
         // TODO: More organized shard processing
         // TODO: getValidShard(player, e)
         boolean bSpecialMob = false;

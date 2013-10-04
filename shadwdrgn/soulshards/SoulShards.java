@@ -24,7 +24,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = "SoulShards", name = "Soul Shards", version = SoulShards.VERSION, dependencies = "required-after:Forge@[7.8.0.716,]")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { "SoulShards" }, packetHandler = PacketHandler.class)
 public class SoulShards {
-    public static final String VERSION = "@VERSION@.@BUILD_NUMBER@";
+    public static final String VERSION = "1.0.39";
 
     @Instance
     public static SoulShards instance;
@@ -84,12 +84,12 @@ public class SoulShards {
     public void init(FMLInitializationEvent e) {
         blockCage = new BlockCage(idCage).setHardness(5.0F)
                 .setStepSound(new StepSound("stone", 1.0F, 1.5F))
-                .setUnlocalizedName("cage");
+                .setUnlocalizedName("cage").func_111022_d("soulshards:cage");
 
         itemBlankShard = new ItemBlankShard(idBlankShard)
-                .setUnlocalizedName("blankSoulShard");
+                .setUnlocalizedName("blankSoulShard").func_111206_d("soulshards:soulShard");
         itemShard = new ItemShard(idShard).setMaxStackSize(1)
-                .setUnlocalizedName("soulShard");
+                .setUnlocalizedName("soulShard").func_111206_d("soulshards:soulShard");
 
         // itemShadowElement = new
         // ItemShadowElement(idShadowElement).setIconIndex(0x32).setUnlocalizedName("shadowElement");

@@ -24,7 +24,7 @@ public class TESoulCage extends TileEntity implements IInventory {
     ArrayList<EntityLiving> persistList = new ArrayList<EntityLiving>();
 
     private static Field presistenceRequired = EntityLiving.class
-            .getDeclaredFields()[72];
+            .getDeclaredFields()[15];
 
     public TESoulCage() {
         presistenceRequired.setAccessible(true);
@@ -70,8 +70,6 @@ public class TESoulCage extends TileEntity implements IInventory {
             for (int i = 0; i < persistList.size(); i++) {
                 EntityLiving el = persistList.get(i);
                 if (el.getAge() > 600) {
-                    // TODO: Remove Debug
-                    System.out.println("Removing Persistence");
                     try {
                         presistenceRequired.set(el, false);
                     } catch (Exception Ex) {
@@ -143,7 +141,7 @@ public class TESoulCage extends TileEntity implements IInventory {
                         NBTTagCompound cTag = mob.getEntityData();
                         cTag.setBoolean("mobcage", true);
                         // this.writeNBTTagsTo(mob);
-                        ((EntityLiving) mob).initCreature();
+                        //((EntityLiving) mob).entityInit();
                         worldObj.spawnEntityInWorld(mob);
                         worldObj.playAuxSFX(2004, xCoord, yCoord, zCoord, 0);
                         if (elMob != null) {
@@ -279,8 +277,7 @@ public class TESoulCage extends TileEntity implements IInventory {
     }
 
     @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-        // TODO Why would this return false, and why does it work anyway?
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         return false;
     }
 }

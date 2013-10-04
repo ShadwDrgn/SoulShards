@@ -153,7 +153,7 @@ public class ItemShard extends Item {
     public boolean onItemUse(ItemStack is, EntityPlayer player, World w, int x,
             int y, int z, int face, float par8, float par9, float par10) {
         if (!w.isRemote) {
-            
+            /*
              if (w.getBlockId(x, y, z) == Block.stone.blockID) {
              w.setBlock(x, y, z, Block.mobSpawner.blockID);
              TileEntityMobSpawner t =
@@ -162,7 +162,7 @@ public class ItemShard extends Item {
              m.setMobID("CaveSpider");
              return true;
              }
-             
+            */
             if (w.getBlockId(x, y, z) == SoulShards.blockCage.blockID
                     && ItemShard.getType(is) != null) {
                 if (ItemShard.getType(is).isEmpty())
@@ -193,7 +193,7 @@ public class ItemShard extends Item {
                 }
             } else if (w.getBlockId(x, y, z) == Block.mobSpawner.blockID && ItemShard.getType(is) != null) {
                 TileEntityMobSpawner tems = (TileEntityMobSpawner) w.getBlockTileEntity(x, y, z);
-                MobSpawnerBaseLogic msbl = tems.func_98049_a(); 
+                MobSpawnerBaseLogic msbl = tems.getSpawnerLogic(); 
                 String m = msbl.getEntityNameToSpawn();
                 if (!m.isEmpty() && m.equals(ItemShard.getType(is))) {
                     Integer i = getCharge(is) + SoulShards.nextTier;
