@@ -11,7 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class EntitySpawnedSkeleton extends EntitySkeleton {
+public class EntitySpawnedSkeleton extends EntitySkeleton implements ISpawnedMob {
     /*
     private EntityAIArrowAttack field_85037_d = new EntityAIArrowAttack(this,
             0.25F, 60, 10.0F);
@@ -20,12 +20,17 @@ public class EntitySpawnedSkeleton extends EntitySkeleton {
     */
     boolean special = false;
 
-    public EntitySpawnedSkeleton(World par1World) {
-        super(par1World);
+    public EntitySpawnedSkeleton(World world, boolean special) {
+        super(world);
+        this.special = special;
+    }
+    
+    public EntitySpawnedSkeleton(World world) {
+        this(world, false);
     }
 
     @Override
-    public void entityInit() {
+    public void postInit() {
         if (special) {
             tasks.addTask(4, new EntityAIAttackOnCollide(this,
                     EntityPlayer.class, 0.31F, false));
@@ -38,7 +43,7 @@ public class EntitySpawnedSkeleton extends EntitySkeleton {
             this.enchantEquipment();
         }
 
-        this.setCanPickUpLoot(rand.nextFloat() < 0.55F * this.worldObj.func_110746_b(this.posX, this.posY, this.posZ));
+        this.setCanPickUpLoot(rand.nextFloat() < 0.55F * this.worldObj.getLocationTensionFactor(this.posX, this.posY, this.posZ));
 
         if (this.getCurrentItemOrArmor(4) == null) {
             Calendar var1 = worldObj.getCurrentDate();
